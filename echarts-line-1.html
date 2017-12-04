@@ -1,0 +1,164 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Echarts--自定义折线图</title>
+	<!-- 引入 echarts.js -->
+    <script src="js/echarts.js"></script>
+</head>
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+	<div id="main" style="height: 500px;"></div>
+	<script type="text/javascript">
+		// 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+		    title: {
+		        text: '产品销量',
+		        subtext: '纯属虚构'
+		    },
+		    tooltip: {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:['产品A','产品B']
+		    },
+		    toolbox: {
+		        show: true,
+		        feature: {
+		            dataZoom: {
+		                yAxisIndex: 'none'
+		            },
+		            dataView: {readOnly: false},
+		            magicType: {type: ['line', 'bar']},
+		            restore: {},
+		            saveAsImage: {}
+		        }
+		    },
+		    xAxis:  {
+		        type: 'category',
+		        boundaryGap: true,
+		        axisLine:{
+		            lineStyle:{
+		                color:'green',
+		                width:2
+		            },
+		        },
+		        axisTick:{
+		            length:20,
+		            lineStyle:{
+		                color:'green',
+		                width:2
+		            }
+		        },
+		        axisLabel:{
+		            color:'#000',
+		            
+		        },
+		        data: ['周一','周二','周三','周四','周五','周六','周日']
+		    },
+		    yAxis: {
+		        type: 'value',
+		        axisLine:{
+		            show:false
+		        },
+		        axisTick:{
+		            show:false
+		        },
+		        axisLabel: {
+		            formatter: '{value}'
+		        }
+		    },
+		    series: [
+		        {
+		            name:'产品A',
+		            type:'line',
+		            smooth:false,
+		            itemStyle:{
+		                normal:{
+		                    color:'#FDC812',
+		                    lineStyle:{
+		                        type:'dashed',
+		                        color:'#FDC812'
+		                    }
+		                }
+		            },
+		            symbol:'emptyArrow',
+		            symbolSize:20,
+		            symbolRotate:-90,
+		            data:[11, 11, {
+		                value:15,
+		                symbol:'image://http://echarts.baidu.com/echarts2/doc/asset/img/echarts-logo.png',
+		                symbolSize:[35,25],
+		                symbolRotate:30
+		            }, 13, 12, 13, 10],
+		            markPoint: {
+		                data: [
+		                    {type: 'max', name: '最大值'}
+		                ]
+		            },
+		            markLine: {
+		                data: [
+		                    {type: 'average', name: '平均值'}
+		                ]
+		            }
+		        },
+		        {
+		            name:'产品B',
+		            type:'line',
+		            smooth:true,
+		            areaStyle:{
+		                normal:{
+		                    color:'#F6EDBB'
+		                }
+		            },
+		            itemStyle:{
+		                normal:{
+		                    color:'#61D2F3',
+		                    lineStyle:{
+		                        type:'solid',
+		                        color:'#61D2F3'
+		                    },
+		                    label:{
+		                        show:true,
+		                        textStyle:{
+		                            //fontSize:16
+		                        }
+		                    }
+		                }
+		            },
+		            data:[3, 5, 3, 5, 2, 3, 6],
+		            symbol:'emptyCircle',
+		            symbolSize:8,
+		            markLine: {
+		                data: [
+		                    {type: 'average', name: '平均值'},
+		                    [{
+		                        symbol: 'none',
+		                        x: '90%',
+		                        yAxis: 'max'
+		                    }, {
+		                        symbol: 'circle',
+		                        symbolSize:15,
+		                        label: {
+		                            normal: {
+		                                position: 'start',
+		                                formatter: '最大值'
+		                            }
+		                        },
+		                        type: 'max',
+		                        name: '最高点'
+		                    }]
+		                ]
+		            }
+		        }
+		    ]
+		};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+	</script>
+</body>
+</html>
